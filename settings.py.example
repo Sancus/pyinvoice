@@ -1,0 +1,22 @@
+position = "Software Engineer"
+
+# Client Address
+client_address = [ 'Software Industries',
+                   '123 Fake Street Unit 12',
+                   'Mountain View, California',
+                   'United States']
+# Your Address
+
+home_address = ['Andrei Hajdukewycz',
+                '123 Fake Street Apt 56',
+                'FakeCity',
+                'California 94999',
+                'United States']
+# Bank
+bank = 'Generic Credit Union'
+
+# Bank Routing Number
+routing = '123456859'
+
+# Bank Account Number
+account = '12345678945454'

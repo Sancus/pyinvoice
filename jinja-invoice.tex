@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{color, colortbl}
+\usepackage{tabularx}
+\usepackage{helvet}
+\usepackage{ltablex}
+
+\renewcommand{\familydefault}{\sfdefault}
+\definecolor{gray}{RGB}{220,220,220}
+\setlength{\extrarowheight}{5pt}
+
+\begin{document}
+\begin{flushleft}
+\begin{minipage}{3in}
+\textbf{\Large INVOICE \VAR{invoice}} \\
+{\Large \VAR{invoice_date}} \\
+\newline
+Total USD \VAR{total} due by \VAR{payment_date}
+\end{minipage}
+\end{flushleft}
+\begin{flushright}
+\begin{minipage}{3in}
+\textbf{\VAR{position}} \\
+\VAR{home_address}
+\end{minipage}
+\end{flushright}
+\textcolor[RGB]{220,220,220}{\rule{\linewidth}{0.2pt}}
+\hfill\break
+
+\begin{minipage}{3in}
+\VAR{client_address}
+\end{minipage}
+\hfill
+\begin{minipage}{3in}
+\textbf{Payment Details} \\
+\VAR{bank} \\
+Routing Number: \VAR{routing} \\
+Account Number: \VAR{account}
+\end{minipage}
+\newline
+\newline
+
+\begin{flushleft}
+\begin{tabularx}{\textwidth}{X|c|c|c|c}
+\rowcolor{black}
+\textcolor{white}{Details} & \textcolor{white}{Date} & \textcolor{white}{Hours} & \textcolor{white}{Rate (\$)} & \textcolor{white}{Subtotal (\$)} \\
+\endhead
+\BLOCK{ for l in work_log }
+\arrayrulecolor{gray}\hline
+\VAR{l["comment"]} & \VAR{l["date"]} & \VAR{l["hours"]} & \VAR{rate}& \VAR{l["subtotal"]} \\
+\BLOCK{ endfor }
+\arrayrulecolor{gray}\hline
+& TOTAL HOURS & \VAR{totalhours} & \Large USD TOTAL & \Large\$\VAR{total}
+\end{tabularx}
+\end{flushleft}
+\end{document}
