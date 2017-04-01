@@ -13,8 +13,9 @@ def main():
     parser = argparse.ArgumentParser(
     description="""
     worked start -s Feb 24 2017
-    worked 8h -s Feb 24 2017 comment
-    worked 8h comment (default today)
+    worked 8 -s Feb 24 2017 comment
+    worked 8 comment (default today)
+    worked summary (lists days and hours worked as well as total)
     """, formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument('-s', '--start-date',
@@ -47,9 +48,6 @@ def main():
         days = collections.OrderedDict(sorted(days.items()))
         for k, v in days.iteritems():
             print '{0} {1} - {2} hours.'.format(calendar.day_name[k.weekday()], k, v)
-        sys.exit()
-    elif first =='hours':
-        project = check_project_file(pfile)
         print "You've worked {0} hours on project {1} since {2}.".format(project['total']/project['rate'], project['name'], project['start_date'])
         sys.exit()
     elif first == 'start':
@@ -58,8 +56,9 @@ def main():
     else:
         try:
             first = int(first)
-        except ValueError:
-            sys.exit('The first argument must be an integer # of hours to enter a work log entry.')
+        except (ValueError, TypeError):
+            parser.print_help()
+            sys.exit(1)
 
     project = check_project_file(pfile, create, work_date)
 
