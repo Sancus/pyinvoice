@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-import jsondate as json
-import sys
-import datetime
 import argparse
+import calendar
+import collections
+import datetime
+import jsondate as json
 import os
+import sys
 
 def main():
     pfile = 'project.json'
@@ -35,11 +37,22 @@ def main():
     # assume we're not creating a new project file
     create = False
 
-    if first =='hours':
+    if first =='summary':
+        # Build a list of days and how many hours were worked
+        project = check_project_file(pfile)
+        days = {}
+        for entry in project['work_log']:
+            base = days.get(entry['date'], 0)
+            days[entry['date']] = base + entry['hours']
+        days = collections.OrderedDict(sorted(days.items()))
+        for k, v in days.iteritems():
+            print '{0} {1} - {2} hours.'.format(calendar.day_name[k.weekday()], k, v)
+        sys.exit()
+    elif first =='hours':
         project = check_project_file(pfile)
         print "You've worked {0} hours on project {1} since {2}.".format(project['total']/project['rate'], project['name'], project['start_date'])
         sys.exit()
-    if first == 'start':
+    elif first == 'start':
         create = True
         work = False
     else:
