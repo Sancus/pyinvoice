@@ -11,7 +11,7 @@ Then `python worked.py start -s 2017-04-01'` or whatever date you want to start 
 
 Edit the `project.json` to add a name and a rate($ currency/hour) to the project.
 
-`python worked.py <number of hours> <comment>` will register number of hours worked, and the -s date argument can be used here too if you want to register a number of hours worked.
+`python worked.py <number of hours> <comment>` will register number of hours worked, and the -s date argument can be used here too. If no date is specified, the default is *today* based on system local time.
 
 `python worked.py summary` will print a list of hours worked like so:
 
