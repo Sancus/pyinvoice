@@ -27,11 +27,12 @@ latex_jinja_env = jinja2.Environment(
 )
 project = worked.check_project_file('project.json')
 
-project['work_log'] = sorted(project['work_log'], key=lambda k: k['date']) 
+project['work_log'] = sorted(project['work_log'], key=lambda k: k['date'])
 project['rate'] = format(float(project['rate']), '.2f')
 project['total'] = format(float(project['total']), '.2f')
 for l in project['work_log']:
     l['subtotal'] = format(float(l['subtotal']), '.2f')
+    project['end_date'] = l['date']
 project['client_address'] = multiline(settings.client_address)
 project['home_address'] = multiline(settings.home_address)
 project['position'] = settings.position
