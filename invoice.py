@@ -1,6 +1,7 @@
 import jinja2
 import os
 from jinja2 import Template
+import re
 import settings
 import worked
 import datetime
@@ -10,6 +11,29 @@ def multiline(linelist):
     for l in linelist[1:]:
         x = '{0} \\\\ {1}'.format(x, l)
     return x
+
+
+def tex_escape(text):
+    """
+        :param text: a plain text message
+        :return: the message escaped to appear correctly in LaTeX
+    """
+    conv = {
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\^{}',
+        '\\': r'\textbackslash{}',
+        '<': r'\textless ',
+        '>': r'\textgreater ',
+    }
+    regex = re.compile('|'.join(re.escape(unicode(key)) for key in sorted(conv.keys(), key = lambda item: - len(item))))
+    return regex.sub(lambda match: conv[match.group()], text)
 
 
 latex_jinja_env = jinja2.Environment(
@@ -28,6 +52,10 @@ latex_jinja_env = jinja2.Environment(
 project = worked.check_project_file('project.json')
 
 project['work_log'] = sorted(project['work_log'], key=lambda k: k['date'])
+
+for i, v in enumerate(project['work_log']):
+    project['work_log'][i]['comment'] = tex_escape(project['work_log'][i]['comment'])
+
 project['rate'] = format(float(project['rate']), '.2f')
 project['total'] = format(float(project['total']), '.2f')
 for l in project['work_log']:
