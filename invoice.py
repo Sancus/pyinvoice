@@ -53,6 +53,7 @@ project = worked.check_project_file('project.json')
 
 project['work_log'] = sorted(project['work_log'], key=lambda k: k['date'])
 
+# Fix bug with unescaped special characters in latex output.
 for i, v in enumerate(project['work_log']):
     project['work_log'][i]['comment'] = tex_escape(project['work_log'][i]['comment'])
 
