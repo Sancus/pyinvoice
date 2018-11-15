@@ -15,7 +15,7 @@
 \textbf{\Large INVOICE \VAR{invoice}} \\
 {\Large \VAR{invoice_date}} \\
 \newline
-Total \textbf{USD \VAR{total}} due by \VAR{payment_date}.
+Total \textbf{CAD \VAR{finaltotal}} due by \VAR{payment_date}.
 \newline
 For work from \VAR{start_date} to \VAR{end_date}.
 \end{minipage}
@@ -35,8 +35,9 @@ For work from \VAR{start_date} to \VAR{end_date}.
 \hfill
 \begin{minipage}{3in}
 \textbf{Payment Details} \\
-\VAR{bank} \\
-Routing Number: \VAR{routing} \\
+Bank: \VAR{bank} \\
+Institution Number: \VAR{institution} \\
+Transit Number: \VAR{transit} \\
 Account Number: \VAR{account}
 \end{minipage}
 \newline
@@ -45,14 +46,18 @@ Account Number: \VAR{account}
 \begin{flushleft}
 \begin{tabularx}{\textwidth}{X|c|c|c|c}
 \rowcolor{black}
-\textcolor{white}{Details} & \textcolor{white}{Date} & \textcolor{white}{Hours} & \textcolor{white}{Rate (\$)} & \textcolor{white}{Subtotal (\$)} \\
+\textcolor{white}{Details} & \textcolor{white}{Date} & \textcolor{white}{Hours} & \textcolor{white}{Rate (\$)} & \textcolor{white}{Amount (\$)} \\
 \endhead
 \BLOCK{ for l in work_log }
 \arrayrulecolor{gray}\hline
 \VAR{l["comment"]} & \VAR{l["date"]} & \VAR{l["hours"]} & \VAR{rate}& \VAR{l["subtotal"]} \\
 \BLOCK{ endfor }
 \arrayrulecolor{gray}\hline
-& TOTAL HOURS & \VAR{totalhours} & \Large USD TOTAL & \Large\$\VAR{total}
+& TOTAL HOURS & \VAR{totalhours} & \Large Subtotal & \Large\$\VAR{total} \\
+\arrayrulecolor{gray}\hline
+&  &  & \Large GST 5\% & \Large\$\VAR{gst} \\
+\arrayrulecolor{gray}\hline
+&  &  & \Large Total CAD & \Large\$\VAR{finaltotal} \\
 \end{tabularx}
 \end{flushleft}
 \end{document}

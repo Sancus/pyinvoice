@@ -57,6 +57,9 @@ project['work_log'] = sorted(project['work_log'], key=lambda k: k['date'])
 for i, v in enumerate(project['work_log']):
     project['work_log'][i]['comment'] = tex_escape(project['work_log'][i]['comment'])
 
+gst = project['total'] * 0.05
+project['gst'] = format(float(gst), '.2f')
+project['finaltotal'] = format(float(gst + project['total']), '.2f')
 project['rate'] = format(float(project['rate']), '.2f')
 project['total'] = format(float(project['total']), '.2f')
 for l in project['work_log']:
@@ -66,10 +69,12 @@ project['client_address'] = multiline(settings.client_address)
 project['home_address'] = multiline(settings.home_address)
 project['position'] = settings.position
 project['bank'] = settings.bank
-project['routing'] = settings.routing
+project['transit'] = settings.transit
+project['institution'] = settings.institution
 project['account'] = settings.account
 project['invoice_date'] = datetime.date.today()
 project['payment_date'] = project['invoice_date'] + datetime.timedelta(days=30)
+
 
 template = latex_jinja_env.get_template('jinja-invoice.tex')
 print(template.render(**project))
