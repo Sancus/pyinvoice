@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import calendar
 import collections
 import datetime
-import jsondate as json
+import jsondate3 as json
 import os
 import sys
 
@@ -46,9 +46,9 @@ def main():
             base = days.get(entry['date'], 0)
             days[entry['date']] = base + entry['hours']
         days = collections.OrderedDict(sorted(days.items()))
-        for k, v in days.iteritems():
-            print '{0} {1} - {2} hours.'.format(calendar.day_name[k.weekday()], k, v)
-        print "You've worked {0} hours on project {1} since {2}.".format(project['total']/project['rate'], project['name'], project['start_date'])
+        for k, v in days.items():
+            print("{0} {1} - {2} hours.".format(calendar.day_name[k.weekday()], k, v))
+        print("You've worked {0} hours on project {1} since {2}.".format(project['total']//project['rate'], project['name'], project['start_date']))
         sys.exit()
     elif first == 'start':
         create = True

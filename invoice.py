@@ -32,7 +32,7 @@ def tex_escape(text):
         '<': r'\textless ',
         '>': r'\textgreater ',
     }
-    regex = re.compile('|'.join(re.escape(unicode(key)) for key in sorted(conv.keys(), key = lambda item: - len(item))))
+    regex = re.compile('|'.join(re.escape(key) for key in sorted(conv.keys(), key = lambda item: - len(item))))
     return regex.sub(lambda match: conv[match.group()], text)
 
 
@@ -73,6 +73,7 @@ project['transit'] = settings.transit
 project['institution'] = settings.institution
 project['account'] = settings.account
 project['invoice_date'] = datetime.date.today()
+# project['invoice_date'] = datetime.date(2020, 12, 31)
 project['payment_date'] = project['invoice_date'] + datetime.timedelta(days=30)
 
 

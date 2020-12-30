@@ -7,13 +7,13 @@ Enter your details into settings.py, following the settings.py.example.
 
 `pip install -r requirements.txt`
 
-Then `python worked.py start -s 2017-04-01'` or whatever date you want to start tracking. I generally rename the `project.json` and start a new one each month.
+Then `python3 worked.py start -s 2017-04-01'` or whatever date you want to start tracking. I generally rename the `project.json` and start a new one each month.
 
 Edit the `project.json` to add a name and a rate($ currency/hour) to the project.
 
-`python worked.py <number of hours> <comment>` will register number of hours worked, and the -s date argument can be used here too. If no date is specified, the default is *today* based on system local time.
+`python3 worked.py <number of hours> <comment>` will register number of hours worked, and the -s date argument can be used here too. If no date is specified, the default is *today* based on system local time.
 
-`python worked.py summary` will print a list of hours worked like so:
+`python3 worked.py summary` will print a list of hours worked like so:
 
 `Tuesday 2017-03-21 - 7 hours.`  
 `Wednesday 2017-03-22 - 9 hours.`  
@@ -31,7 +31,8 @@ Edit the `project.json` to add a name and a rate($ currency/hour) to the project
 It will add up multiple instances for each day, so if you worked 2,3,and 2 hours on a particular day with separate comments, they will be added together in the summary output.
 
 Once you're done tracking hours, you can print an invoice with:
-`python invoice.py` and if you want to turn it into pdf, you'll need to install texlive and do:
-`python invoice.py | pdflatex`.
+`python3 invoice.py` and if you want to turn it into pdf, you'll need to install texlive and do:
+`python3 invoice.py | pdflatex`.
 
-Make sure you have the right texlive packages installed, particularly ltablex.
+CentOS packages: texlive-latex, texlive-collection-fontsrecommended and manual install of ltablex.
+https://ctan.org/pkg/ltablex
